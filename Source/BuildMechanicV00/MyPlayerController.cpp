@@ -55,6 +55,14 @@ void AMyPlayerController::OnPossess(APawn* aPawn)
         // Ok so first, when the robot is possessed, we want it to lift a little off of the workbench and towards us...
         ControlledRobotPawn->RobotMoveComponent->RobotBuildModeFloat();
 
+        if(ActionRobotPan)
+        {
+
+            // BIND IT
+            EnhancedInputComponent->BindAction(ActionRobotPan, ETriggerEvent::Triggered, this, &AMyPlayerController::HandlePanRobot);
+
+        }
+
 
     }
 }
@@ -93,6 +101,15 @@ void AMyPlayerController::HandlePossessRobot()
             // this->SetViewTargetWithBlend(Cast<AMyPlayerPawn>(PlayerPawn), 2.f);
         }
     }
+}
+
+void AMyPlayerController::HandlePanRobot(const FInputActionValue& InputActionValue){
+
+    // Value is a Vector2D
+    const FVector2D MouseCoord = InputActionValue.Get<FVector2D>();
+
+    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("Mouse X: %f, Mouse Y: %f"), MouseCoord.X, MouseCoord.Y));
+
 }
 
 void AMyPlayerController::OnUnPossess()

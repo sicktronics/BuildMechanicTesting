@@ -47,6 +47,8 @@ protected:
 	virtual void OnUnPossess() override;
 
 	void HandlePossessRobot();
+	void HandlePanRobot(const FInputActionValue& InputActionValue);
+
 
 private:
 	// Used to store the InputComponent cast to an EnhancedInputComponent
